@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "rmccue/requests": ">=1.0"
+        "rmccue/requests": ">=1.0",
+        "name": "pimple/pimple"
     },
     "autoload": {
     	"psr-0": {

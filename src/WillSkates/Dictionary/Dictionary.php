@@ -15,6 +15,9 @@ namespace WillSkates\Dictionary;
 
 /**
  * A class designed to provide a simple api for getting definitions of words.
+ *
+ * @todo Class to extend pimple to allow me to drop
+ *       out the data source API object.
  * 
  * @package     WillSkates's Components
  * @subpackage  Dictionary
@@ -24,7 +27,8 @@ namespace WillSkates\Dictionary;
  * @link        http://github.com/WillSkates/Dictionary
  * @version     0.0.1 alpha
  */
-class Dictionary {
+class Dictionary 
+{
 
 
 	/**
