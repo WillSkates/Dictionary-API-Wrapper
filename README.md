@@ -1,8 +1,6 @@
 #Dictionary API
 A set of classes that allows a developer to be able to fetch definitions for words and terms.
 
-[![Build Status](https://secure.travis-ci.org/rmccue/Requests.png?branch=master)](http://travis-ci.org/rmccue/Requests)
-
 NOTE:
 This library requires composer. You can find out more over at http://getcomposer.org. There is also a windows installer: https://github.com/johnstevenson/composer-setup or if you are using a unix system (MAC, Linux etc. ) you can find some instructions here: http://getcomposer.org/doc/00-intro.md
 
