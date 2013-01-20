@@ -29,4 +29,11 @@ use WillSkates\Dictionary\Word;
 class WordTest extends PHPUnit_Framework_TestCase
 {
 
+	public function creationTest()
+	{
+		$api = new Word(array(
+			'word' => 'hello'
+		));
+	}
+
 }

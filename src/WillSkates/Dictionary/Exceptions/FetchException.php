@@ -11,11 +11,11 @@
  * @version     0.0.1 alpha
  */
 
-use WillSkates\Dictionary\Dictionary;
+namespace WillSkates\Dictionary\Exceptions;
 
 /**
- * Test that the methods required to define words
- * work and appropriately handles all errors that occur.
+ * A class to define that the api encountered an error
+ * when trying to fetch some information.
  * 
  * @package     WillSkates's Components
  * @subpackage  Dictionary
@@ -25,14 +25,9 @@ use WillSkates\Dictionary\Dictionary;
  * @link        http://github.com/WillSkates/Dictionary
  * @version     0.0.1 alpha
  */
-
-class DictionaryTest extends PHPUnit_Framework_TestCase
+class FetchException extends \Exception
 {
 
-	public function creationTest()
-	{
-		$dict = new Dictionary(DICTIONARY_API_LOCATION);
-		$dict = new Dictionary();
-	}
+	
 
 }

@@ -65,9 +65,6 @@ class Word extends \stdClass
 
 	/**
 	 * Retrieve the definition of this word as a string.
-	 *
-	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
-	 *         										available.
 	 * 
 	 * @return String the definition of this word.
 	 */
@@ -85,9 +82,6 @@ class Word extends \stdClass
 	 * 
 	 * @param  String $lang The 2 character iso code for the 
 	 *                      language to translate into ('en').
-	 *
-	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
-	 *         										available.
 	 * 
 	 * @return array This word translated into another language.
 	 */
@@ -106,9 +100,6 @@ class Word extends \stdClass
 	 * When this object is echoed or casted as a 
 	 * string, return it's definition.
 	 *
-	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
-	 *         										available.
-	 * 
 	 * @return String The definition of this word.
 	 */
 	public function __toString()

@@ -26,7 +26,9 @@ into your command line from within the specified folder.
 
 		echo $dictionary->word('hello'); // A greeting ... (uses __toString()).
 
-	} catch ( WillSkates\Dictionary\FetchException $e ) {
+	} catch ( WillSkates\Dictionary\Exceptions\FetchException $e ) {
+		echo "Oh no, we couldnt get any information for 'hello'";
+	} catch ( WillSkates\Dictionary\Exceptions\ConnectionProblemException $e ) {
 		echo "oh no the api is not available.";
 	}
 

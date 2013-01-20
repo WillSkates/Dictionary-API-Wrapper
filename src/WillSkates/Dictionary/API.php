@@ -48,8 +48,9 @@ class API
 	/**
 	 * Retrieve and decode information from the data service.
 	 * 
-	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
-	 *         										available.
+	 * @throws WillSkates\Dictionary\FetchException      In the event that there was no information
+	 *         										     available.
+	 * @throws WillSkates\Dictionary\ConnectionException In the event that no connection could be established.
 	 * 
 	 * @return Mixed Either an array containing all of the information requested or false
 	 *               to indicate that an error has occurred.
@@ -70,6 +71,7 @@ class API
 	 *
 	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
 	 *         										for a given word.
+	 * @throws WillSkates\Dictionary\ConnectionException In the event that no connection could be established.
 	 * 
 	 * @return Mixed Either an array containing all of the information regarding
 	 *               the word in question or false to signify that an error occured.
@@ -85,6 +87,8 @@ class API
 	 * 
 	 * @throws WillSkates\Dictionary\FetchException In the event that there was no information
 	 *         										for a given word.
+	 *         										
+	 * @throws WillSkates\Dictionary\ConnectionException In the event that no connection could be established.
 	 * 
 	 * @return Mixed Either an array containing all of the information regarding
 	 *               the word in question or false to signify that an error occured.

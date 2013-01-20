@@ -11,13 +11,11 @@
  * @version     0.0.1 alpha
  */
 
-
-
 use WillSkates\Dictionary\API;
 
 /**
- * A class designed to interact between the dictionary api and the dictionary web
- * service.
+ * Test that the communication between the wrapper and the web service 
+ * works and appropriately handles all errors that occur.
  * 
  * @package     WillSkates's Components
  * @subpackage  Dictionary
@@ -29,5 +27,11 @@ use WillSkates\Dictionary\API;
  */
 class APITest extends PHPUnit_Framework_TestCase
 {
+
+	public function creationTest()
+	{
+		$api = new API(DICTIONARY_API_LOCATION);
+		$api = new API();
+	}
 
 }
