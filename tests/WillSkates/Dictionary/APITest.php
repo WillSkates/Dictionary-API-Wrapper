@@ -1,4 +1,4 @@
-<?php
+`<?php
 /**
  * An api that allows developers to fetch the definitions of words on-demand.
  * 
@@ -28,10 +28,53 @@ use WillSkates\Dictionary\API;
 class APITest extends PHPUnit_Framework_TestCase
 {
 
-	public function creationTest()
+	public function testCreation()
 	{
 		$api = new API(DICTIONARY_API_LOCATION);
-		$api = new API();
+	}
+
+	protected function make()
+	{
+		return new API(DICTIONARY_API_LOCATION);
+	}
+
+	public function testWords()
+	{
+
+		$api = $this->make();
+		$words = require __DIR__ . '/_words.php';
+		$langs = array('en', 'de', 'fr', 'ar');
+
+		foreach ( $words as $word => $details ) {
+
+			$res = $api->get('word/' . $word);
+
+			$this->assertFalse($res->error);
+
+			$this->assertEquals(
+				$details['def'],
+				$res->result[0]['definition']
+			);
+
+			$res = $api->word($word);
+			$def = $res->getDefinition();
+			$def = reset($def);
+
+			$this->assertEquals(
+				$details['def'],
+				$def
+			);
+
+			$details['en'] = $word;
+
+			foreach ( $langs as $lang ) {
+
+				$res = $api->word($word, $lang);
+				$translate = $res->translate($lang);
+			}
+
+		}
+
 	}
 
 }

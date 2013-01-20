@@ -13,6 +13,8 @@
 
 namespace WillSkates\Dictionary;
 
+use \Requests;
+
 /**
  * A class designed to interact between the dictionary api and the dictionary web
  * service.
@@ -55,8 +57,11 @@ class API
 	 * @return Mixed Either an array containing all of the information requested or false
 	 *               to indicate that an error has occurred.
 	 */
-	protected function get($url)
+	public function get($url)
 	{
+
+		$request = Requests::get($this->url . $url)->body;
+		return (Object)json_decode($request, true);
 
 	}
 
@@ -79,6 +84,35 @@ class API
 	 */
 	public function word($word, $translate = false)
 	{
+
+		$url = 'word/' . $word;
+
+		if ( $translate ) {
+			$url .= '/' . $translate;
+		}
+
+		$res = $this->get($url);
+
+		if ( !$res->error ) {
+
+			$details = $res->result[0];
+			unset($details['definition']);
+
+			$details['definition'] = array();
+
+			foreach ( $res->result as $def ) {
+				$details['definition'][] = $def['definition'];
+			}
+
+			if ( $translate ) {
+				if ( !$res->translation['error'] ) {
+					$details['translations'][$translate] = $res->translation;
+				}
+			}
+
+			return new Word($details, $this);
+
+		}
 
 	}
 

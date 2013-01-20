@@ -13,6 +13,7 @@
  */
 
 use WillSkates\Dictionary\Word;
+use WillSkates\Dictionary\API;
 
 /**
  * Test that the methods required to define words and 
@@ -29,11 +30,11 @@ use WillSkates\Dictionary\Word;
 class WordTest extends PHPUnit_Framework_TestCase
 {
 
-	public function creationTest()
+	public function testCreation()
 	{
 		$api = new Word(array(
 			'word' => 'hello'
-		));
+		), new API(DICTIONARY_API_LOCATION));
 	}
 
 }

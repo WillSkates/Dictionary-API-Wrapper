@@ -60,7 +60,17 @@ class Word extends \stdClass
 	 */
 	public function __construct(array $data, API $api)
 	{
+
+		$this->api = $api;
+
 		$this->translations = array();
+		$this->definition = array();
+
+		foreach ( $data as $key => $value ) {
+
+			$this->$key = $value;
+
+		}
 	}
 
 	/**

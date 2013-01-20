@@ -29,7 +29,7 @@ use WillSkates\Dictionary\Dictionary;
 class DictionaryTest extends PHPUnit_Framework_TestCase
 {
 
-	public function creationTest()
+	public function testCreation()
 	{
 		$dict = new Dictionary(DICTIONARY_API_LOCATION);
 		$dict = new Dictionary();
