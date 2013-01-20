@@ -1,5 +1,5 @@
 {
-    "name": "WillSkates/Dictionary",
+    "name": "willskates/dictionaryapi",
     "type": "library",
     "description": "On-demand definition source.",
     "keywords": ["Dictionary", "definition", "translation"],
