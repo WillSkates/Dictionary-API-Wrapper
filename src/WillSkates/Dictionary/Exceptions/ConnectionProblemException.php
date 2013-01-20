@@ -25,7 +25,7 @@ namespace WillSkates\Dictionary\Exceptions;
  * @link        http://github.com/WillSkates/Dictionary
  * @version     0.0.1 alpha
  */
-class ConnectioonProblemException extends \Exception
+class ConnectionProblemException extends \Exception
 {
 
 	
