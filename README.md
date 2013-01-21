@@ -6,7 +6,7 @@ This library requires composer. You can find out more over at http://getcomposer
 
 Clone or download the contents of this repository onto your local machine, setup your project as you normally would and add the following to the "require" section of your composer.json file:
 	
-	"WillSkates/Dictionary-API-Wrapper": "1.0.0"
+	"WillSkates/Dictionary-API-Wrapper": "dev-master"
 
 After you have done this, run the command:
 
