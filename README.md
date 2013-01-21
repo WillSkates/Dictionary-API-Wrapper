@@ -21,11 +21,12 @@ into your command line from within the specified folder.
 	try {
 		$word = $dictionary->word('hello');
 
-		echo $word->getDefinition(); // A greeting ...
+		echo $word->getDefinition(); // array(0=>'A greeting ...');
+		echo $word->getFirstDefinition() // 'A greeting ...';
 		echo $word->getTranslation('fr'); //Bonjour.
 
-		echo $dictionary->word('hello'); // A greeting ... (uses __toString()).
-		echo $dictionary->word('hello', 'en'); // A greeting ... (uses __toString()).
+		echo $dictionary->word('hello'); // 'A greeting ...' (uses __toString()).
+		echo $dictionary->word('hello', 'en'); // 'A greeting ...' (uses __toString()).
 
 		echo $dictionary->word('hello')->translate('de')[0]['translation']; //Hallo :D
 

@@ -101,4 +101,23 @@ class WordTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
+	public function testGetFirstDefinition()
+	{
+
+		$defs = require __DIR__ . '/_words.php';
+		$words = array_keys($defs);
+
+		$theWord = reset($words);
+
+		$word = $this->make($theWord);
+
+		$def = $word->getFirstDefinition();
+
+		$this->assertEquals($defs[$theWord]['def'], $def);
+
+		$def = $word->__toString();
+		$this->assertEquals($defs[$theWord]['def'], $def);
+
+	}
+
 }

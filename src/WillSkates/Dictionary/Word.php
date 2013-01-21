@@ -127,6 +127,22 @@ class Word extends \stdClass
 	}
 
 	/**
+	 * Get the first definition in the list of definitions for this word.
+	 * 
+	 * @return Mixed Either the first definition of this word or false if no definitions
+	 *               were available.
+	 */
+	public function getFirstDefinition()
+	{
+		$definitions = $this->getDefinition();
+		if ( isset($definitions[0]) ) {
+			return $definitions[0];
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * When this object is echoed or casted as a 
 	 * string, return it's definition.
 	 *
@@ -134,7 +150,7 @@ class Word extends \stdClass
 	 */
 	public function __toString()
 	{
-		return $this->getDefinition();
+		return (String)$this->getFirstDefinition();
 	}
 
 }
