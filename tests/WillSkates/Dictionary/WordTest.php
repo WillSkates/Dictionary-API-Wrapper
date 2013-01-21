@@ -13,7 +13,7 @@
  */
 
 use WillSkates\Dictionary\Word;
-use WillSkates\Dictionary\API;
+use WillSkates\Dictionary\Sources\API;
 
 /**
  * Test that the methods required to define words and 
@@ -30,11 +30,75 @@ use WillSkates\Dictionary\API;
 class WordTest extends PHPUnit_Framework_TestCase
 {
 
+	protected static $api;
+
 	public function testCreation()
 	{
-		$api = new Word(array(
+		$word = new Word(array(
 			'word' => 'hello'
 		), new API(DICTIONARY_API_LOCATION));
+	}
+
+	protected function make($word)
+	{
+
+		if ( self::$api === null ) {
+			self::$api = new API(DICTIONARY_API_LOCATION);
+		}
+
+		return new Word(array(
+			'word' => $word
+		), self::$api);
+	}
+
+	public function testDefinition()
+	{
+
+		$words = require __DIR__ . '/_words.php';
+
+		foreach ( $words as $word => $details) {
+
+			$word = $this->make($word);
+			$definition = $word->getDefinition();
+
+			$this->assertEquals(
+				$details['def'],
+				$definition[0]
+			);
+
+		}
+
+	}
+
+	public function testTranslation()
+	{
+
+		$words = require __DIR__ . '/_words.php';
+		//Note : is there a way to solve this unicode problem??
+		$langs = array('de', 'fr'/*, 'ar'*/);
+
+		foreach ( $words as $word => $details) {
+
+			$word = $this->make($word);
+
+			foreach ( $langs as $lang ) {
+
+				$trans = $word->translate($lang);
+
+				$translations = array();
+
+				foreach ($trans as $t) {
+					$translations[] = $t['translation'];
+				}
+
+				$this->assertTrue(
+					in_array($details[$lang], $translations),
+					print_r(array_merge($trans, array('lang'=>$lang)), true)
+				);
+
+			}
+
+		}
 	}
 
 }

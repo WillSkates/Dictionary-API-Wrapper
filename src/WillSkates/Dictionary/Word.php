@@ -47,21 +47,21 @@ class Word extends \stdClass
 
 	/**
 	 * An object that helps establish the link between
-	 * this object and the dictionary API itself.
+	 * this object and the dictionary data.
 	 * 
-	 * @var API
+	 * @var Sources\ISource
 	 */
-	protected $api;
+	protected $dataSource;
 
 	/**
 	 * Create a word object with some data in it.
 	 * 
 	 * @param array $data The data regarding this word.
 	 */
-	public function __construct(array $data, API $api)
+	public function __construct(array $data, Sources\ISource $dSource)
 	{
 
-		$this->api = $api;
+		$this->dataSource = $dSource;
 
 		$this->translations = array();
 		$this->definition = array();
@@ -81,9 +81,15 @@ class Word extends \stdClass
 	public function getDefinition()
 	{
 
-		if ( !empty($this->definition) ) {
-			return $this->definition;
+		if ( empty($this->definition) ) {
+			$word = $this->dataSource->word($this->word);
+			$this->definition = $word->definition;
+
+			unset($word);
 		}
+
+		
+		return $this->definition;
 
 	}
 
@@ -103,6 +109,20 @@ class Word extends \stdClass
 		}
 
 		$this->translations[$lang] = array();
+
+		$translated = $this->dataSource->word($this->word, $lang);
+
+		if ( isset($translated->translations[$lang]) ) {
+
+			$this->translations[$lang] = $translated->translations[$lang];
+
+		} else {
+			//@TODO throw exception.
+		}
+
+		unset($translated);
+
+		return $this->translations[$lang];
 
 	}
 

@@ -11,7 +11,7 @@
  * @version     0.0.1 alpha
  */
 
-use WillSkates\Dictionary\API;
+use WillSkates\Dictionary\Sources\API;
 
 /**
  * Test that the communication between the wrapper and the web service 
@@ -43,7 +43,7 @@ class APITest extends PHPUnit_Framework_TestCase
 
 		$api = $this->make();
 		$words = require __DIR__ . '/_words.php';
-		$langs = array('en', 'de', 'fr', 'ar');
+		$langs = array('de', 'fr'/*, 'ar'*/);
 
 		foreach ( $words as $word => $details ) {
 
@@ -65,16 +65,79 @@ class APITest extends PHPUnit_Framework_TestCase
 				$def
 			);
 
-			$details['en'] = $word;
-
 			foreach ( $langs as $lang ) {
 
 				$res = $api->word($word, $lang);
-				$translate = $res->translate($lang);
+				$trans = $res->translate($lang);
+
+				$translations = array();
+
+				foreach ($trans as $t) {
+					$translations[] = $t['translation'];
+				}
+
+				$this->assertTrue(
+					in_array($details[$lang], $translations),
+					print_r(array_merge($trans, array('lang'=>$lang, 'word'=>$word)), true)
+				);
+
 			}
 
 		}
 
+	}
+
+	public function testRandom()
+	{
+
+		$api = $this->make();
+
+		$current = 1;
+
+		while ( $current < 1000 ) {
+
+			$res = $api->get('random');
+			$res->count = $current;
+
+			$this->assertFalse($res->error, print_r($res, true));
+
+			$res = $api->random();
+			$res->count = $current;
+
+			$this->assertFalse($res->error, print_r($res, true));
+
+			$current++;
+
+		}
+
+	}
+
+	/**
+     * @expectedException \WillSkates\Dictionary\Exceptions\ConnectionProblemException
+     */
+	public function testConnectionProblemException()
+	{
+		$api = new API('https://dasiosdjwaionmioajdioawjdioawjiodjawiodwadawjdkoap.edhjauidhwuidhoahdiawh');
+		$api->get('word/hello');
+	}
+
+	/**
+     * @expectedException \WillSkates\Dictionary\Exceptions\FetchException
+     */
+	public function testFetchException()
+	{
+		$api = $this->make();
+		$api->get('word/contrafabulationarycontraintinousgoo');
+	}
+
+	/**
+     * @expectedException \WillSkates\Dictionary\Exceptions\TranslationFetchException
+     */
+	public function testTranslationFetchException()
+	{	
+		//translate an english word into english? ARE YOU INSANE???!!?!?!?!?!?
+		$api = $this->make();
+		$api->word('hello', 'en');
 	}
 
 }

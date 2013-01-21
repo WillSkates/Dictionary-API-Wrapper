@@ -25,17 +25,22 @@ into your command line from within the specified folder.
 		echo $word->getTranslation('fr'); //Bonjour.
 
 		echo $dictionary->word('hello'); // A greeting ... (uses __toString()).
+		echo $dictionary->word('hello', 'en'); // A greeting ... (uses __toString()).
+
+		echo $dictionary->word('hello')->translate('de')[0]['translation']; //Hallo :D
 
 	} catch ( WillSkates\Dictionary\Exceptions\FetchException $e ) {
 		echo "Oh no, we couldnt get any information for 'hello'";
 	} catch ( WillSkates\Dictionary\Exceptions\ConnectionProblemException $e ) {
 		echo "oh no the api is not available.";
+	} catch ( WillSkates\Dictionary\Exceptions\TranslationFetchException $e ) {
+		echo "Just.... dont try to translate an english word into english.";
 	}
 
 ###Next
-The plan is to release the ability to define and translate words first. After that's complete
-I will also work towards releasing methods which allow you to view all of the words that begin with a given letter.
-Those lists will also be paginated.
+	The plan is to release the ability to define and translate words first. After that's complete
+	I will also work towards releasing methods which allow you to view all of the words that begin with a given letter.
+	Those lists will also be paginated.
 
 ####Note:
 	

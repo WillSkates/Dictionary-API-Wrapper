@@ -8,7 +8,7 @@ return array(
 	),
 	'goober' => array(
 		'def' => 'A peanut.',
-		'de' => 'goober',
+		'de' => 'Erdnuss',
 		'fr' => 'goober',
 		'ar' => 'goober'
 	),

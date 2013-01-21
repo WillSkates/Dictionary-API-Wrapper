@@ -13,6 +13,8 @@
 
 namespace WillSkates\Dictionary;
 
+use WillSkates\Dictionary\Sources\ISource;
+
 /**
  * A class designed to provide a simple api for getting definitions of words.
  *
@@ -27,17 +29,8 @@ namespace WillSkates\Dictionary;
  * @link        http://github.com/WillSkates/Dictionary
  * @version     0.0.1 alpha
  */
-class Dictionary 
+class Dictionary extends \Pimple
 {
-
-
-	/**
-	 * An object that helps establish the link between
-	 * this object and the dictionary API itself.
-	 * 
-	 * @var API
-	 */
-	protected $api;
 
 	/**
 	 * Create an instance of the Dictionary component.
@@ -48,10 +41,20 @@ class Dictionary
 	 * @param string $apiUrl The base url to the dictionary 
 	 *                       api (default: http://dictionary.thisbe.ws).
 	 */
-	public function __construct( $apiUrl = 'http://dictionary.thisbe.ws/' )
+	public function __construct( ISource $source = null )
 	{
 
-		$this->api = new API($apiUrl);
+		parent::__construct();
+
+		if ( is_null($source) ) {
+
+			$this['source'] = function ( $container ) {
+				return new API('http://dictionary.thisbe.ws');
+			};
+
+		} else {
+			$this['source'] = $source;
+		}
 
 	}
 
@@ -70,6 +73,8 @@ class Dictionary
 	public function word($word, $translation = false)
 	{
 
+		return $this['source']->word($word, $translation);
+
 	}
 
 	/**
@@ -82,7 +87,7 @@ class Dictionary
 	 */
 	public function random()
 	{
-
+		return $this['source']->random();
 	}
 
 }
