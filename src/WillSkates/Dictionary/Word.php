@@ -143,6 +143,22 @@ class Word extends \stdClass
 	}
 
 	/**
+	 * Get the first definition of this word in 
+	 * a given language.
+	 * 
+	 * @param  String $lang The 2 character iso code for the 
+	 *                      language to translate into ('en').
+	 * 
+	 * @return array The translation information.
+	 */
+	public function getFirstTranslation($lang)
+	{
+		$translation = $this->translate($lang);
+		$translation = reset($translation);
+		return $translation['translation'];
+	}
+
+	/**
 	 * When this object is echoed or casted as a 
 	 * string, return it's definition.
 	 *

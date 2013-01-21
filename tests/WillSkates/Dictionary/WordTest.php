@@ -120,4 +120,18 @@ class WordTest extends PHPUnit_Framework_TestCase
 
 	}
 
+	public function testGetFirstTranslation()
+	{
+		$defs = require __DIR__ . '/_words.php';
+		$words = array_keys($defs);
+
+		$theWord = reset($words);
+
+		$word = $this->make($theWord);
+
+		$def = $word->getFirstTranslation('de');
+
+		$this->assertEquals($defs[$theWord]['de'], $def);
+	}
+
 }
