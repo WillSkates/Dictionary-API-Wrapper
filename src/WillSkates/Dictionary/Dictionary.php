@@ -49,7 +49,7 @@ class Dictionary extends \Pimple
 		if ( is_null($source) ) {
 
 			$this['source'] = function ( $container ) {
-				return new API('http://dictionary.thisbe.ws');
+				return new API('http://dictionary.stuffby.ws');
 			};
 
 		} else {

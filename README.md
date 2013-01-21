@@ -19,7 +19,7 @@ into your command line from within the specified folder.
 	$dictionary = new WillSkates\Dictionary();
 
 	try {
-		$word = 
+		$word = $dictionary->word('hello');
 
 		echo $word->getDefinition(); // A greeting ...
 		echo $word->getTranslation('fr'); //Bonjour.
@@ -47,5 +47,5 @@ into your command line from within the specified folder.
 
 	####Note:
 		
-		This functionality is already in the api but not planned for this phase of the wrapper, You can achieve that by using http://dictionary.thisbe.ws/letter/a for example.
+		This functionality is already in the api but not planned for this phase of the wrapper, You can achieve that by using http://dictionary.stuffby.ws/letter/a for example.
 		Enjoy!
