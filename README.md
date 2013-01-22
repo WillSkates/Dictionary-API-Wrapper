@@ -8,6 +8,10 @@ Clone or download the contents of this repository onto your local machine, setup
 	
 	"willskates/dictionaryapi": "v1.0.0"
 
+Make sure that you also set the minimum-stability to 'dev'.
+	
+	"minimum-stability": "dev"
+
 After you have done this, run the command:
 
 	composer install
